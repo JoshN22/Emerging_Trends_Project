@@ -16,16 +16,4 @@ public class MainMenu : MonoBehaviour
     {
         
     }
-
-
-
-    public void CharacterSelect()
-    {
-
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
 }
