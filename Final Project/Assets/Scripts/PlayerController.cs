@@ -5,9 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float horizontalInput;
-    public float speed = 15.0f;
-    public float zRangeLeft = 5.4f;
-    public float zRangeRight = -6.6f;
+    public float speed;
+    public float zRangeLeft = 1f;
+    public float zRangeRight = 1f;
     public LayerMask groundlayers;
     public float jumpForce = 7;
     private Rigidbody rb;
@@ -36,12 +36,24 @@ public class PlayerController : MonoBehaviour
 
         // Allows the user to move left or right 
         horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        if (transform.position.y < 0.66 && transform.position.y > 0.45)
+        {
+            speed = 10.0f;
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        }
+        else {
+            speed = 4.0f;
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        }
+        
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
+    }
+
+    public void isOnGround(int yPos) {
     }
 }
