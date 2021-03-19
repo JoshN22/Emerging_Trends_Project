@@ -324,7 +324,7 @@ MonoBehaviour:
   groundlayers:
     serializedVersion: 2
     m_Bits: 0
-  jumpForce: 7
+  jumpForce: 7.5
   collider: {fileID: 0}
 --- !u!54 &877167534
 Rigidbody:
@@ -353,8 +353,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.7608681, z: 1}
+  m_Center: {x: -0, y: 0.7885456, z: 0}
 --- !u!111 &877167537
 Animation:
   m_ObjectHideFlags: 0
@@ -400,7 +400,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf82b597e2fc87489ff100e8fd97754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bg: {fileID: 9114938899269910176, guid: d0a7e4cc4285c424c9db99b94713ebcf, type: 3}
+  obstaclePrefabs:
+  - {fileID: 8948852253653880094, guid: 76fc2212a43316e49a720c6e1c727179, type: 3}
+  bg: {fileID: 1840587325}
 --- !u!4 &1041996339
 Transform:
   m_ObjectHideFlags: 0
@@ -683,6 +685,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 32.173, y: 90.00001, z: 0}
+--- !u!1 &1840587325 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9114938899269910176, guid: d0a7e4cc4285c424c9db99b94713ebcf,
+    type: 3}
+  m_PrefabInstance: {fileID: 9114938898684565859}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9114938898684565859
 PrefabInstance:
   m_ObjectHideFlags: 0
