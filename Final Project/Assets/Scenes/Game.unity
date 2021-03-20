@@ -318,13 +318,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   horizontalInput: 0
-  speed: 15
+  speed: 10
   zRangeLeft: 5.4
   zRangeRight: -6.5
+  isGrounded: 1
   groundlayers:
     serializedVersion: 2
     m_Bits: 0
-  jumpForce: 7.5
+  jumpForce: 6
   collider: {fileID: 0}
 --- !u!54 &877167534
 Rigidbody:
@@ -402,7 +403,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obstaclePrefabs:
   - {fileID: 8948852253653880094, guid: 76fc2212a43316e49a720c6e1c727179, type: 3}
-  bg: {fileID: 1840587325}
+  - {fileID: 4508041397763516582, guid: bc66e1a524db98d45992d2ede5836185, type: 3}
+  - {fileID: 4592058124809271192, guid: eca89b903694c104397fd9d5ec5322a9, type: 3}
+  - {fileID: 3410345952512152867, guid: e5494179fc2fe49448e2d38ee2cb706e, type: 3}
+  - {fileID: 882968632975657248, guid: 493b3f96aa5d87946b199c8990fc618b, type: 3}
+  - {fileID: 5367115911154139346, guid: 9d9c2489b90bb5449bbbd5ca3a0c095d, type: 3}
+  - {fileID: 5358165421846767728, guid: eddd4d9b0992c1a4cb887eb82958ecad, type: 3}
+  bg: {fileID: 9114938899269910176, guid: d0a7e4cc4285c424c9db99b94713ebcf, type: 3}
 --- !u!4 &1041996339
 Transform:
   m_ObjectHideFlags: 0
@@ -685,12 +692,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 32.173, y: 90.00001, z: 0}
---- !u!1 &1840587325 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9114938899269910176, guid: d0a7e4cc4285c424c9db99b94713ebcf,
-    type: 3}
-  m_PrefabInstance: {fileID: 9114938898684565859}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9114938898684565859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -763,5 +764,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5410208848252979854, guid: d0a7e4cc4285c424c9db99b94713ebcf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d0a7e4cc4285c424c9db99b94713ebcf, type: 3}

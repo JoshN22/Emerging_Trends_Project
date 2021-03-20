@@ -5,13 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float horizontalInput;
-    public float speed;
-    public float zRangeLeft = 1f;
-    public float zRangeRight = 1f;
+    public float speed = 7.0f;
+    public float zRangeLeft = 5.8f;
+    public float zRangeRight = -6.8f;
+
+    public bool isGrounded = true;
+
     public LayerMask groundlayers;
     public float jumpForce = 7;
     private Rigidbody rb;
     public BoxCollider collider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +26,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         // Makes the player stop if it goes to far to the left
         if (transform.position.z < zRangeRight)
         {
@@ -36,24 +41,40 @@ public class PlayerController : MonoBehaviour
 
         // Allows the user to move left or right 
         horizontalInput = Input.GetAxis("Horizontal");
-        if (transform.position.y < 0.66 && transform.position.y > 0.45)
+        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+
+        isOnGround();
+        if (isGrounded == true)
         {
-            speed = 10.0f;
-            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+            speed = 7;
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
         }
-        else {
-            speed = 4.0f;
-            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        else if (isGrounded == false)
+        {
+            speed = 3.5f;
         }
         
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
+        
 
     }
 
-    public void isOnGround(int yPos) {
+    public void isOnGround() {
+        RaycastHit hit;
+        float distance = 1f;
+        Vector3 dir = new Vector3(0, -1);
+
+        if (Physics.Raycast(transform.position, dir, out hit, distance))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
     }
 }

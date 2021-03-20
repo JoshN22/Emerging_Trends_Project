@@ -10,23 +10,20 @@ public class SpawnManager : MonoBehaviour
     private float spawnPosX = 265.9f;
     private float spawnPosZ = 11;
     private float spawnInterval = 12.7199f;
-    private float obstacleSpawnInterval = 4.0f;
+    private float obstacleSpawnInterval = 0.5f;
     
 
         // Start is called before the first frame update
     void Start()
     {
         Invoke("SpawnBackground", 0);
-        InvokeRepeating("SpawnObjects", 2.0f,obstacleSpawnInterval);
+        InvokeRepeating("SpawnObjects", 0, obstacleSpawnInterval);
     }
 
-    // Spawn random ball at random x position at top of play area
     void SpawnBackground()
     {
         
-        // Generate random ball index and random spawn position
         Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, spawnPosZ);
-        // instantiate ball at random spawn location
         Instantiate(bg, spawnPos, bg.transform.rotation);
         Invoke("SpawnBackground", spawnInterval);
     }
@@ -36,7 +33,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnObjects()
     {
         // Set random spawn location and random object index
-        Vector3 spawnLocation = new Vector3(130,0,Random.Range(-5.4f, 5.4f));
+        Vector3 spawnLocation = new Vector3(130,0, Random.Range(-5.8f, 4.6f));
         int index = Random.Range(0, obstaclePrefabs.Length);
         Instantiate(obstaclePrefabs[index], spawnLocation, obstaclePrefabs[index].transform.rotation);
         
