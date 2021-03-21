@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveLevel : MonoBehaviour
 {
     private PlayerController playerControllerScript;
-    public float speed = 15;
+    public float speed = 18;
     // Start is called before the first frame update
     void Start()
     {
