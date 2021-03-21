@@ -775,6 +775,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpSound: {fileID: 8300000, guid: 3297b8e010ccde2469b5fcd29d3dd4b2, type: 3}
   crashSound: {fileID: 8300000, guid: 2adb857f469be6542b88433c6cb895b6, type: 3}
+  powerSound: {fileID: 8300000, guid: 210433c3c786d084e9a076fc56f81969, type: 3}
+  hasPowerup: 0
+  powerupIndicator: {fileID: 2599527334179419542, guid: 9be73f9cb5010f4418c95071ef55168a,
+    type: 3}
+  powerUpDuration: 15
   horizontalInput: 0
   speed: 10
   zRangeLeft: 5.4
@@ -969,6 +974,8 @@ MonoBehaviour:
   - {fileID: 2897884267854169965, guid: 00251a6f714a66a4c884baf616cffe8b, type: 3}
   - {fileID: 2837441212796393152, guid: 0b9d5e26260fd684090bd23d8d0626c1, type: 3}
   - {fileID: 2127804516459650598, guid: 242aa50d8e52cbc4c948faff352ef31a, type: 3}
+  powerupPrefabs:
+  - {fileID: 2599527334179419542, guid: 9be73f9cb5010f4418c95071ef55168a, type: 3}
   bg: {fileID: 9114938899269910176, guid: d0a7e4cc4285c424c9db99b94713ebcf, type: 3}
 --- !u!4 &1041996339
 Transform:

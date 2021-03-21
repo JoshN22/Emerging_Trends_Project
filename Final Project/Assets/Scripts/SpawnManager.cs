@@ -17,15 +17,13 @@ public class SpawnManager : MonoBehaviour
     private float obstacleSpawnInterval = 0.5f;
     
 
-        // Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         Invoke("SpawnBackground", 0);
 
         InvokeRepeating("SpawnObjects", 0, obstacleSpawnInterval);
         InvokeRepeating("SpawnCoins", 0, 1.75f);
-
-        InvokeRepeating("SpawnObjects", 0 , obstacleSpawnInterval);
         InvokeRepeating("SpawnPowerups", 0, powerupspawnInterval);
 
     }
@@ -39,7 +37,7 @@ public class SpawnManager : MonoBehaviour
     }
 
 
-    //spawn obstacles 
+    //Spawn obstacles 
     void SpawnObjects()
     {
         // Set random spawn location and random object index
@@ -47,16 +45,6 @@ public class SpawnManager : MonoBehaviour
         int index = Random.Range(0, obstaclePrefabs.Length);
         Instantiate(obstaclePrefabs[index], spawnLocation, Quaternion.Euler(0, Random.Range(0, 360), 0) );
         //obstaclePrefabs[index].transform.rotation
-
-
-        Instantiate(obstaclePrefabs[index], spawnLocation, obstaclePrefabs[index].transform.rotation);
-
-
-        // If game is still active, spawn new object
-        //if (playerControllerScript.gameOver == false)
-        // {
-        // Instantiate(objectPrefabs[index], spawnLocation, objectPrefabs[index].transform.rotation);
-        //}
     }
 
 
