@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,6 +21,10 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 7;
     private Rigidbody rb;
     public BoxCollider collider;
+
+    public GameObject gameOverMenu;
+
+ 
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +66,11 @@ public class PlayerController : MonoBehaviour
         else if (isGrounded == false)
         {
             speed = 3.5f;
+        }
+
+        if (transform.position.x < -7.83) {
+            gameOverMenu.SetActive(true);
+            Destroy(gameObject);
         }
     }
 
