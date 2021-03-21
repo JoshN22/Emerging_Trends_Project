@@ -7,6 +7,13 @@ public class PlayerController : MonoBehaviour
     public AudioClip jumpSound;
     public AudioClip crashSound;
     private AudioSource playerAudio;
+    public AudioClip powerSound;
+
+    public bool hasPowerup;
+    public GameObject powerupIndicator;
+    public int powerUpDuration = 15;
+     // how hard to hit enemy without powerup
+    private float powerupJump = 12; 
 
     public float horizontalInput;
     public float speed = 7.0f;
@@ -16,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = true;
 
     public LayerMask groundlayers;
-    public float jumpForce = 7;
+    public float jumpForce = 9;
     private Rigidbody rb;
     public BoxCollider collider;
 
@@ -26,6 +33,25 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
         playerAudio = GetComponent<AudioSource>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Powerup"))
+        {
+            hasPowerup = true;
+            powerupIndicator.SetActive(true);
+            StartCoroutine(PowerupCooldown());
+            Destroy(other.gameObject);
+        }
+    }
+
+    // Coroutine to count down powerup duration
+    IEnumerator PowerupCooldown()
+    {
+        yield return new WaitForSeconds(powerUpDuration);
+        hasPowerup = false;
+        powerupIndicator.SetActive(false);
     }
 
     // Update is called once per frame
@@ -51,9 +77,15 @@ public class PlayerController : MonoBehaviour
         if (isGrounded == true)
         {
             speed = 7;
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && hasPowerup == true)
             {
+                rb.AddForce(Vector3.up * powerupJump, ForceMode.Impulse);
+                // Plays Ausio clip when player jumps.
+                playerAudio.PlayOneShot(jumpSound, 1.0f);
+            }
+            else if (Input.GetKeyDown(KeyCode.Space) && hasPowerup == false){
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                // Plays Ausio clip when player jumps.
                 playerAudio.PlayOneShot(jumpSound, 1.0f);
             }
         }
@@ -82,15 +114,12 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            //explosionParticle.Play();
-            //gameOver = true;
-          //  Debug.Log("Game Over");
-          //  playerAnim.SetBool("Death_b", true);
-          //  playerAnim.SetInteger("DeathType_int", 1);
-           // dirtParticle.Stop();
             playerAudio.PlayOneShot(crashSound, 1.0f);
         }
-
+        if (collision.gameObject.CompareTag("Powerup"))
+        {
+            playerAudio.PlayOneShot(powerSound, 1.0f);
+        }
     }
 
 }

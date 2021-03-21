@@ -319,6 +319,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpSound: {fileID: 8300000, guid: 3297b8e010ccde2469b5fcd29d3dd4b2, type: 3}
   crashSound: {fileID: 8300000, guid: 2adb857f469be6542b88433c6cb895b6, type: 3}
+  powerSound: {fileID: 8300000, guid: 45cef61c2bc17f54c884243110fe2ee8, type: 3}
+  hasPowerup: 0
+  powerupIndicator: {fileID: 5358165421846767728, guid: eddd4d9b0992c1a4cb887eb82958ecad,
+    type: 3}
+  powerUpDuration: 5
   horizontalInput: 0
   speed: 10
   zRangeLeft: 5.4
@@ -507,6 +512,8 @@ MonoBehaviour:
   - {fileID: 882968632975657248, guid: 493b3f96aa5d87946b199c8990fc618b, type: 3}
   - {fileID: 5367115911154139346, guid: 9d9c2489b90bb5449bbbd5ca3a0c095d, type: 3}
   - {fileID: 5358165421846767728, guid: eddd4d9b0992c1a4cb887eb82958ecad, type: 3}
+  powerupPrefabs:
+  - {fileID: 2599527334179419542, guid: 9be73f9cb5010f4418c95071ef55168a, type: 3}
   bg: {fileID: 9114938899269910176, guid: d0a7e4cc4285c424c9db99b94713ebcf, type: 3}
 --- !u!4 &1041996339
 Transform:
@@ -805,7 +812,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.682
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
