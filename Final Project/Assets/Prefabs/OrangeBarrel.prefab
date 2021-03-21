@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: -139964278392320487}
   - component: {fileID: 4620512042107630052}
   m_Layer: 0
-  m_Name: Barrel_1F
-  m_TagString: Untagged
+  m_Name: OrangeBarrel
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

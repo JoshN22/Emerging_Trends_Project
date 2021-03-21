@@ -94,8 +94,8 @@ GameObject:
   - component: {fileID: 608516657332945737}
   - component: {fileID: 2252393674681013493}
   m_Layer: 0
-  m_Name: Car_14I
-  m_TagString: Untagged
+  m_Name: Car
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

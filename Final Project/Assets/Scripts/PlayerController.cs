@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public AudioClip jumpSound;
+    public AudioClip crashSound;
+    private AudioSource playerAudio;
+
     public float horizontalInput;
     public float speed = 7.0f;
     public float zRangeLeft = 5.8f;
@@ -21,12 +25,12 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         // Makes the player stop if it goes to far to the left
         if (transform.position.z < zRangeRight)
         {
@@ -47,20 +51,16 @@ public class PlayerController : MonoBehaviour
         if (isGrounded == true)
         {
             speed = 7;
-
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                playerAudio.PlayOneShot(jumpSound, 1.0f);
             }
         }
         else if (isGrounded == false)
         {
             speed = 3.5f;
         }
-        
-
-        
-
     }
 
     public void isOnGround() {
@@ -77,4 +77,20 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            //explosionParticle.Play();
+            //gameOver = true;
+          //  Debug.Log("Game Over");
+          //  playerAnim.SetBool("Death_b", true);
+          //  playerAnim.SetInteger("DeathType_int", 1);
+           // dirtParticle.Stop();
+            playerAudio.PlayOneShot(crashSound, 1.0f);
+        }
+
+    }
+
 }
