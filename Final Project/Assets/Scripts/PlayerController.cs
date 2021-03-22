@@ -6,6 +6,10 @@ using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    public TextMeshProUGUI powerUpText;
+    public TextMeshProUGUI scoreText;
+    private int score;
+
     public AudioClip jumpSound;
     public AudioClip crashSound;
     private AudioSource playerAudio;
@@ -27,7 +31,6 @@ public class PlayerController : MonoBehaviour
     public LayerMask groundlayers;
     public float jumpForce = 9;
     private Rigidbody rb;
-    public BoxCollider collider;
 
     public GameObject gameOverMenu;
 
@@ -37,27 +40,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        collider = GetComponent<BoxCollider>();
         playerAudio = GetComponent<AudioSource>();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Powerup"))
-        {
-            hasPowerup = true;
-            powerupIndicator.SetActive(true);
-            StartCoroutine(PowerupCooldown());
-            Destroy(other.gameObject);
-        }
-    }
-
-    // Coroutine to count down powerup duration
-    IEnumerator PowerupCooldown()
-    {
-        yield return new WaitForSeconds(powerUpDuration);
-        hasPowerup = false;
-        powerupIndicator.SetActive(false);
     }
 
     // Update is called once per frame
@@ -79,30 +62,16 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
 
-        isOnGround();
-        if (isGrounded == true)
-        {
-            speed = 7;
-            if (Input.GetKeyDown(KeyCode.Space) && hasPowerup == true)
-            {
-                rb.AddForce(Vector3.up * powerupJump, ForceMode.Impulse);
-                // Plays Ausio clip when player jumps.
-                playerAudio.PlayOneShot(jumpSound, 1.0f);
-            }
-            else if (Input.GetKeyDown(KeyCode.Space) && hasPowerup == false){
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                // Plays Ausio clip when player jumps.
-                playerAudio.PlayOneShot(jumpSound, 1.0f);
-            }
-        }
-        else if (isGrounded == false)
-        {
-            speed = 3.5f;
-        }
+        playerOnGroundCheck();
+        GameOver();
+    }
 
-        if (transform.position.x < -7.83) {
+    public void GameOver()
+    {
+        if (transform.position.x < -7.83)
+        {
             gameOverMenu.SetActive(true);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
@@ -121,15 +90,82 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void playerOnGroundCheck()
+    {
+        isOnGround();
+        if (isGrounded == true)
+        {
+            speed = 7;
+            if (Input.GetKeyDown(KeyCode.Space) && hasPowerup == true)
+            {
+                rb.AddForce(Vector3.up * powerupJump, ForceMode.Impulse);
+                // Plays Ausio clip when player jumps.
+                playerAudio.PlayOneShot(jumpSound, 1.0f);
+            }
+            else if (Input.GetKeyDown(KeyCode.Space) && hasPowerup == false)
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                // Plays Ausio clip when player jumps.
+                playerAudio.PlayOneShot(jumpSound, 1.0f);
+            }
+        }
+        else if (isGrounded == false)
+        {
+            speed = 3.5f;
+        }
+    }
+
+    public void UpdateScore(int scoreToAdd)
+    {
+        score += scoreToAdd;
+        scoreText.text = "Score: " + score;
+    }
+
+    // Coroutine to count down powerup duration
+    IEnumerator PowerupCooldown()
+    {
+        yield return new WaitForSeconds(powerUpDuration);
+        hasPowerup = false;
+        //powerupIndicator.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Powerup"))
+        {
+            hasPowerup = true;
+            powerupIndicator.SetActive(true);
+            StartCoroutine(PowerupCooldown());
+            Destroy(other.gameObject);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             playerAudio.PlayOneShot(crashSound, 1.0f);
         }
-        if (collision.gameObject.CompareTag("Powerup"))
+        else if (collision.gameObject.CompareTag("Powerup"))
         {
             playerAudio.PlayOneShot(powerSound, 1.0f);
+        }
+        else if (collision.gameObject.CompareTag("GoldCoin"))
+        {
+            UpdateScore(1);
+            Destroy(collision.gameObject);
+        }
+
+        else if (collision.gameObject.CompareTag("BlueCoin"))
+        {
+            UpdateScore(5);
+            Destroy(collision.gameObject);
+        }
+
+        else if (collision.gameObject.CompareTag("RedCoin"))
+        {
+            UpdateScore(10);
+            Destroy(collision.gameObject);
         }
     }
 
