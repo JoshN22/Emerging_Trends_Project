@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.x < -7.83) {
             gameOverMenu.SetActive(true);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
