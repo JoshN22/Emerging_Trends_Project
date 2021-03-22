@@ -114,11 +114,16 @@ public class PlayerController : MonoBehaviour
             speed = 3.5f;
         }
     }
+        if (transform.position.x < -7.83) {
+            gameOverMenu.SetActive(true);
+            //Destroy(gameObject);
+        }
 
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
+
     }
 
     // Coroutine to count down powerup duration
