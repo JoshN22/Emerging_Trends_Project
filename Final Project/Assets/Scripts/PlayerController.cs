@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public bool hasPowerup;
     public GameObject powerupIndicator;
-    public int powerUpDuration = 15;
+    public int powerUpDuration = 10;
      // how hard to hit enemy without powerup
     private float powerupJump = 12; 
 
@@ -126,7 +126,8 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(powerUpDuration);
         hasPowerup = false;
-        //powerupIndicator.SetActive(false);
+        powerUpText.gameObject.SetActive(false);
+        powerupIndicator.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -134,7 +135,8 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Powerup"))
         {
             hasPowerup = true;
-            powerupIndicator.SetActive(true);
+            powerupIndicator.SetActive(false);
+            powerUpText.gameObject.SetActive(true);
             StartCoroutine(PowerupCooldown());
             Destroy(other.gameObject);
         }
