@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip crashSound;
     private AudioSource playerAudio;
     public AudioClip powerSound;
+    public AudioClip coinSound;
 
     public bool hasPowerup;
     public GameObject powerupIndicator;
@@ -71,7 +72,7 @@ public class PlayerController : MonoBehaviour
         if (transform.position.x < -7.83)
         {
             gameOverMenu.SetActive(true);
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -114,10 +115,6 @@ public class PlayerController : MonoBehaviour
             speed = 3.5f;
         }
     }
-        if (transform.position.x < -7.83) {
-            gameOverMenu.SetActive(true);
-            //Destroy(gameObject);
-        }
 
     public void UpdateScore(int scoreToAdd)
     {
@@ -139,6 +136,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Powerup"))
         {
+            playerAudio.PlayOneShot(powerSound, 1.0f);
             hasPowerup = true;
             powerupIndicator.SetActive(false);
             powerUpText.gameObject.SetActive(true);
@@ -153,24 +151,21 @@ public class PlayerController : MonoBehaviour
         {
             playerAudio.PlayOneShot(crashSound, 1.0f);
         }
-        else if (collision.gameObject.CompareTag("Powerup"))
-        {
-            playerAudio.PlayOneShot(powerSound, 1.0f);
-        }
         else if (collision.gameObject.CompareTag("GoldCoin"))
         {
+            playerAudio.PlayOneShot(coinSound, 1.0f);
             UpdateScore(1);
             Destroy(collision.gameObject);
         }
-
         else if (collision.gameObject.CompareTag("BlueCoin"))
         {
+            playerAudio.PlayOneShot(coinSound, 1.0f);
             UpdateScore(5);
             Destroy(collision.gameObject);
         }
-
         else if (collision.gameObject.CompareTag("RedCoin"))
         {
+            playerAudio.PlayOneShot(coinSound, 1.0f);
             UpdateScore(10);
             Destroy(collision.gameObject);
         }
