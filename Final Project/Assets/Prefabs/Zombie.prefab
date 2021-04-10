@@ -336,6 +336,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2624322597685731994}
   - component: {fileID: 2624322597692656860}
+  - component: {fileID: 74453933321959269}
+  - component: {fileID: 5472290108862091425}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -350,7 +352,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2624322597685378810}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -4.53, y: 0, z: 0}
   m_LocalScale: {x: 1.35, y: 1.35, z: 1.35}
   m_Children:
@@ -358,7 +360,7 @@ Transform:
   - {fileID: 2624322597685732760}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!95 &2624322597692656860
 Animator:
   serializedVersion: 3
@@ -378,6 +380,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &74453933321959269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624322597685378810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1342ec57421e6c44db213f4baf224d75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 18
+--- !u!114 &5472290108862091425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2624322597685378810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bf82b597e2fc87489ff100e8fd97754, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclePrefabs: []
+  coinPrefabs: []
+  powerupPrefabs: []
+  bg: {fileID: 0}
 --- !u!1 &2624322597685378814
 GameObject:
   m_ObjectHideFlags: 0
