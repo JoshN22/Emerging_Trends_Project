@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject[] obstaclePrefabs;
+    public GameObject[] characterPrefabs;
     public GameObject[] coinPrefabs;
 
     public GameObject[] powerupPrefabs;
@@ -22,6 +23,12 @@ public class SpawnManager : MonoBehaviour
     {
         Invoke("SpawnBackground", 0);
 
+
+        int index = PlayerPrefs.GetInt("CharacterSelected", 0);
+
+        GameObject playerObject = Instantiate(characterPrefabs[index], new Vector3(characterPrefabs[index].transform.position.x, characterPrefabs[index].transform.position.y, characterPrefabs[index].transform.position.z), characterPrefabs[index].transform.rotation);
+        playerObject.SetActive(true);
+
         InvokeRepeating("SpawnObjects", 0, obstacleSpawnInterval);
         InvokeRepeating("SpawnCoins", 0, 1.75f);
         InvokeRepeating("SpawnPowerups", 0, powerupspawnInterval);
@@ -30,7 +37,6 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnBackground()
     {
-        
         Vector3 spawnPos = new Vector3(spawnPosX, spawnPosY, spawnPosZ);
         Instantiate(bg, spawnPos, bg.transform.rotation);
         Invoke("SpawnBackground", spawnInterval);

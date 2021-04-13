@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public bool hasPowerup;
     public GameObject powerupIndicator;
     public int powerUpDuration = 10;
+
      // how hard to hit enemy without powerup
     private float powerupJump = 12; 
 
@@ -69,10 +70,11 @@ public class PlayerController : MonoBehaviour
 
     public void GameOver()
     {
-        if (transform.position.x < -7.83)
+        if (transform.position.x < -5)
         {
             gameOverMenu.SetActive(true);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            MoveLevel.speed = 0;
         }
     }
 
