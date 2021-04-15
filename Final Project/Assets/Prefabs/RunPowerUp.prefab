@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: -6172582769177027741}
   - component: {fileID: 4132559006926371658}
   m_Layer: 0
-  m_Name: CoinPurple3DChecqueredWhite-Bolt
-  m_TagString: Powerup
+  m_Name: RunPowerUp
+  m_TagString: RunPowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

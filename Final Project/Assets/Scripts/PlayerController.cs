@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI highScore1Text;
     public TextMeshProUGUI highScore2Text;
     public TextMeshProUGUI highScore3Text;
-    public InputField nameField;
     private int score;
 
     public AudioClip jumpSound;
@@ -20,8 +19,8 @@ public class PlayerController : MonoBehaviour
     public AudioClip powerSound;
     public AudioClip coinSound;
 
-    public bool hasPowerup;
-    public bool hasRunPoweup = false;
+    public bool hasJumpPowerup = false;
+    public bool hasRunPowerup = false;
     public GameObject powerupIndicator;
     public int powerUpDuration = 10;
     public float powerupSpeed = 14.0f;
@@ -41,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
 
     public GameObject gameOverMenu;
+    public GameObject highScoreNameMenu;
     public Animation anim;
     private bool froze = false;
 
@@ -71,12 +71,12 @@ public class PlayerController : MonoBehaviour
         }
 
         // Allows the user to move left or right 
-        if (froze == false && hasRunPoweup == true)
+        if (froze == false && hasRunPowerup == true)
         {
             horizontalInput = Input.GetAxis("Horizontal");
             transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * powerupSpeed);
         }
-        else if (froze == false && hasRunPoweup == false){
+        else if (froze == false && hasRunPowerup == false){
             horizontalInput = Input.GetAxis("Horizontal");
             transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
         }
@@ -94,23 +94,35 @@ public class PlayerController : MonoBehaviour
     {
         if (score > PlayerPrefs.GetInt("HighScore1", 0) && score > PlayerPrefs.GetInt("HighScore2", 0) && score > PlayerPrefs.GetInt("HighScore3", 0))
         {
+            highScoreNameMenu.SetActive(true);
+            HighScoreNameManager.highScorePlace = 1;
             PlayerPrefs.SetInt("HighScore1", score);
         }
         else if (score < PlayerPrefs.GetInt("HighScore1", 0) && score > PlayerPrefs.GetInt("HighScore2", 0) && score > PlayerPrefs.GetInt("HighScore3", 0))
         {
+            highScoreNameMenu.SetActive(true);
+            HighScoreNameManager.highScorePlace = 2;
             PlayerPrefs.SetInt("HighScore2", score);
         }
         else if (score < PlayerPrefs.GetInt("HighScore1", 0) && score < PlayerPrefs.GetInt("HighScore2", 0) && score > PlayerPrefs.GetInt("HighScore3", 0))
         {
+            highScoreNameMenu.SetActive(true);
+            HighScoreNameManager.highScorePlace = 3;
             PlayerPrefs.SetInt("HighScore3", score);
         }
        
         int highScore1 = PlayerPrefs.GetInt("HighScore1", 0);
+        string highScoreName1 = PlayerPrefs.GetString("HighScoreName1", "");
+
         int highScore2 = PlayerPrefs.GetInt("HighScore2", 0);
+        string highScoreName2 = PlayerPrefs.GetString("HighScoreName2", "");
+
         int highScore3 = PlayerPrefs.GetInt("HighScore3", 0);
-        highScore1Text.SetText($"1: {highScore1}");
-        highScore2Text.SetText($"2: {highScore2}");
-        highScore3Text.SetText($"3: {highScore3}");
+        string highScoreName3 = PlayerPrefs.GetString("HighScoreName3", "");
+
+        highScore1Text.SetText($"1: {highScoreName1} {highScore1}");
+        highScore2Text.SetText($"2: {highScoreName2} {highScore2}");
+        highScore3Text.SetText($"3: {highScoreName3} {highScore3}");
     }
 
     public void GameOver()
@@ -149,13 +161,13 @@ public class PlayerController : MonoBehaviour
         if (isGrounded == true)
         {
             speed = 7;
-            if (Input.GetKeyDown(KeyCode.Space) && hasPowerup == true)
+            if (Input.GetKeyDown(KeyCode.Space) && hasJumpPowerup == true)
             {
                 rb.AddForce(Vector3.up * powerupJump, ForceMode.Impulse);
                 // Plays Ausio clip when player jumps.
                 playerAudio.PlayOneShot(jumpSound, 1.0f);
             }
-            else if (Input.GetKeyDown(KeyCode.Space) && hasPowerup == false)
+            else if (Input.GetKeyDown(KeyCode.Space) && hasJumpPowerup == false)
             {
                 rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 // Plays Ausio clip when player jumps.
@@ -177,26 +189,27 @@ public class PlayerController : MonoBehaviour
     IEnumerator PowerupCooldown()
     {
         yield return new WaitForSeconds(powerUpDuration);
-        hasPowerup = false;
+        hasJumpPowerup = false;
+        hasRunPowerup = false;
         powerUpText.gameObject.SetActive(false);
         powerupIndicator.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Powerup"))
+        if (other.gameObject.CompareTag("JumpPowerUp"))
         {
             playerAudio.PlayOneShot(powerSound, 1.0f);
-            hasPowerup = true;
+            hasJumpPowerup = true;
             powerupIndicator.SetActive(false);
             powerUpText.gameObject.SetActive(true);
             StartCoroutine(PowerupCooldown());
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.CompareTag("jumpPowerup"))
+        else if (other.gameObject.CompareTag("RunPowerUp"))
         {
             playerAudio.PlayOneShot(powerSound, 1.0f);
-            hasPowerup = true;
+            hasRunPowerup = true;
             powerupIndicator.SetActive(false);
             powerUpText.gameObject.SetActive(true);
             StartCoroutine(PowerupCooldown());
