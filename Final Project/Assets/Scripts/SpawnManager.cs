@@ -31,7 +31,7 @@ public class SpawnManager : MonoBehaviour
 
         InvokeRepeating("SpawnObjects", 0, obstacleSpawnInterval);
         InvokeRepeating("SpawnCoins", 0, 1.75f);
-        InvokeRepeating("SpawnPowerups", 0, powerupspawnInterval);
+        InvokeRepeating("SpawnPowerups", 1, powerupspawnInterval);
 
     }
 
@@ -49,7 +49,7 @@ public class SpawnManager : MonoBehaviour
         // Set random spawn location and random object index
         Vector3 spawnLocation = new Vector3(130,0, Random.Range(-5.8f, 4.6f));
         int index = Random.Range(0, obstaclePrefabs.Length);
-        Instantiate(obstaclePrefabs[index], spawnLocation, Quaternion.Euler(0, Random.Range(0, 360), 0) );
+        Instantiate(obstaclePrefabs[index], spawnLocation, Quaternion.Euler(0, Random.Range(0, 360), 0));
         //obstaclePrefabs[index].transform.rotation
     }
 
@@ -64,7 +64,7 @@ public class SpawnManager : MonoBehaviour
     void SpawnPowerups()
     {
         // Set random spawn location and random object index
-        Vector3 spawnLocation1 = new Vector3(130, 0, Random.Range(-5.8f, 4.6f));
+        Vector3 spawnLocation1 = new Vector3(130, 1, Random.Range(-5.8f, 4.6f));
         int index = Random.Range(0, powerupPrefabs.Length);
         Instantiate(powerupPrefabs[index], spawnLocation1, powerupPrefabs[index].transform.rotation);
 

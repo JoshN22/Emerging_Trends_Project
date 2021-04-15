@@ -18,8 +18,10 @@ public class PlayerController : MonoBehaviour
     public AudioClip coinSound;
 
     public bool hasPowerup;
+    public bool hasRunPoweup = false;
     public GameObject powerupIndicator;
     public int powerUpDuration = 10;
+    public float powerupSpeed = 14.0f;
 
      // how hard to hit enemy without powerup
     private float powerupJump = 12; 
@@ -66,8 +68,12 @@ public class PlayerController : MonoBehaviour
         }
 
         // Allows the user to move left or right 
-        if (froze == false)
+        if (froze == false && hasRunPoweup == true)
         {
+            horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * powerupSpeed);
+        }
+        else if (froze == false && hasRunPoweup == false){
             horizontalInput = Input.GetAxis("Horizontal");
             transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
         }
@@ -149,9 +155,7 @@ public class PlayerController : MonoBehaviour
     {
         score += scoreToAdd;
         scoreText.text = "Score: " + score;
-
     }
-
     // Coroutine to count down powerup duration
     IEnumerator PowerupCooldown()
     {
@@ -164,6 +168,15 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Powerup"))
+        {
+            playerAudio.PlayOneShot(powerSound, 1.0f);
+            hasPowerup = true;
+            powerupIndicator.SetActive(false);
+            powerUpText.gameObject.SetActive(true);
+            StartCoroutine(PowerupCooldown());
+            Destroy(other.gameObject);
+        }
+        else if (other.gameObject.CompareTag("jumpPowerup"))
         {
             playerAudio.PlayOneShot(powerSound, 1.0f);
             hasPowerup = true;
