@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
     public GameObject gameOverMenu;
     public GameObject highScoreNameMenu;
+    public GameObject highScores;
     public Animation anim;
     private bool froze = false;
 
@@ -49,6 +50,15 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        PlayerPrefs.SetString("HighScoreName1", "J1");
+        PlayerPrefs.SetInt("HighScore1", 16);
+
+        PlayerPrefs.SetString("HighScoreName2", "J2");
+        PlayerPrefs.SetInt("HighScore2", 9);
+
+        PlayerPrefs.SetString("HighScoreName3", "J3");
+        PlayerPrefs.SetInt("HighScore3", 3);
+
         MoveLevel.speed = 18;
         rb = GetComponent<Rigidbody>();
         playerAudio = GetComponent<AudioSource>();
@@ -96,19 +106,31 @@ public class PlayerController : MonoBehaviour
         {
             highScoreNameMenu.SetActive(true);
             HighScoreNameManager.highScorePlace = 1;
+            PlayerPrefs.SetInt("HighScore3", PlayerPrefs.GetInt("HighScore2"));
+            PlayerPrefs.SetInt("HighScore2", PlayerPrefs.GetInt("HighScore1"));
             PlayerPrefs.SetInt("HighScore1", score);
+
+            PlayerPrefs.SetString("HighScoreName3", PlayerPrefs.GetString("HighScoreName2"));
+            PlayerPrefs.SetString("HighScoreName2", PlayerPrefs.GetString("HighScoreName1"));
         }
         else if (score < PlayerPrefs.GetInt("HighScore1", 0) && score > PlayerPrefs.GetInt("HighScore2", 0) && score > PlayerPrefs.GetInt("HighScore3", 0))
         {
             highScoreNameMenu.SetActive(true);
             HighScoreNameManager.highScorePlace = 2;
+            PlayerPrefs.SetInt("HighScore3", PlayerPrefs.GetInt("HighScore2"));
             PlayerPrefs.SetInt("HighScore2", score);
+
+            PlayerPrefs.SetString("HighScoreName3", PlayerPrefs.GetString("HighScoreName2"));
         }
         else if (score < PlayerPrefs.GetInt("HighScore1", 0) && score < PlayerPrefs.GetInt("HighScore2", 0) && score > PlayerPrefs.GetInt("HighScore3", 0))
         {
             highScoreNameMenu.SetActive(true);
             HighScoreNameManager.highScorePlace = 3;
             PlayerPrefs.SetInt("HighScore3", score);
+        }
+        else if (score < PlayerPrefs.GetInt("HighScore1", 0) && score < PlayerPrefs.GetInt("HighScore2", 0) && score < PlayerPrefs.GetInt("HighScore3", 0))
+        {
+            highScores.SetActive(true);
         }
        
         int highScore1 = PlayerPrefs.GetInt("HighScore1", 0);

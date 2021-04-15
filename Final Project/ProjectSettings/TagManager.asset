@@ -9,6 +9,8 @@ TagManager:
   - BlueCoin
   - RedCoin
   - GoldCoin
+  - RunPowerUp
+  - JumpPowerUp
   layers:
   - Default
   - TransparentFX

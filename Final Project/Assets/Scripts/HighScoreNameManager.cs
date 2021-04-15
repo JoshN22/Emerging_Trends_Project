@@ -7,6 +7,9 @@ public class HighScoreNameManager : MonoBehaviour
     private string highScoreName;
     public static int highScorePlace;
 
+    public GameObject HighScores;
+    public GameObject HighScoreName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +23,7 @@ public class HighScoreNameManager : MonoBehaviour
     }
 
 
-    public void ReadStringValue(string input)
+    public void ReadStringInput(string input)
     {
         highScoreName = input;
         Debug.Log(highScoreName);
@@ -37,6 +40,7 @@ public class HighScoreNameManager : MonoBehaviour
             PlayerPrefs.SetString("HighScoreName3", highScoreName);
         }
 
-
+        HighScores.SetActive(true);
+        HighScoreName.SetActive(false);
     }
 }
