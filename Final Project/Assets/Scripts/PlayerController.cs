@@ -8,7 +8,10 @@ public class PlayerController : MonoBehaviour
 {
     public TextMeshProUGUI powerUpText;
     public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI highScore1Text;
+    public TextMeshProUGUI highScore2Text;
+    public TextMeshProUGUI highScore3Text;
+    public InputField nameField;
     private int score;
 
     public AudioClip jumpSound;
@@ -89,11 +92,25 @@ public class PlayerController : MonoBehaviour
 
     public void HighScore()
     {
-        if (score > PlayerPrefs.GetInt("HighScore", 0)) {
-            PlayerPrefs.SetInt("HighScore", score);
+        if (score > PlayerPrefs.GetInt("HighScore1", 0) && score > PlayerPrefs.GetInt("HighScore2", 0) && score > PlayerPrefs.GetInt("HighScore3", 0))
+        {
+            PlayerPrefs.SetInt("HighScore1", score);
         }
-        int highScore = PlayerPrefs.GetInt("HighScore", 0);
-        highScoreText.SetText($"HIGH SCORE: {highScore}");
+        else if (score < PlayerPrefs.GetInt("HighScore1", 0) && score > PlayerPrefs.GetInt("HighScore2", 0) && score > PlayerPrefs.GetInt("HighScore3", 0))
+        {
+            PlayerPrefs.SetInt("HighScore2", score);
+        }
+        else if (score < PlayerPrefs.GetInt("HighScore1", 0) && score < PlayerPrefs.GetInt("HighScore2", 0) && score > PlayerPrefs.GetInt("HighScore3", 0))
+        {
+            PlayerPrefs.SetInt("HighScore3", score);
+        }
+       
+        int highScore1 = PlayerPrefs.GetInt("HighScore1", 0);
+        int highScore2 = PlayerPrefs.GetInt("HighScore2", 0);
+        int highScore3 = PlayerPrefs.GetInt("HighScore3", 0);
+        highScore1Text.SetText($"1: {highScore1}");
+        highScore2Text.SetText($"2: {highScore2}");
+        highScore3Text.SetText($"3: {highScore3}");
     }
 
     public void GameOver()
