@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public TextMeshProUGUI powerUpText;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highScoreText;
     private int score;
 
     public AudioClip jumpSound;
@@ -35,14 +36,18 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
 
     public GameObject gameOverMenu;
+    public Animation anim;
+    private bool froze = false;
 
  
 
     // Start is called before the first frame update
     void Start()
     {
+        MoveLevel.speed = 18;
         rb = GetComponent<Rigidbody>();
         playerAudio = GetComponent<AudioSource>();
+        anim = GetComponent<Animation>();
     }
 
     // Update is called once per frame
@@ -61,11 +66,28 @@ public class PlayerController : MonoBehaviour
         }
 
         // Allows the user to move left or right 
-        horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        if (froze == false)
+        {
+            horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
+        }
+        else
+        {
+            horizontalInput = Input.GetAxis("Horizontal");
+            transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * 0);
+        }
 
         playerOnGroundCheck();
         GameOver();
+    }
+
+    public void HighScore()
+    {
+        if (score > PlayerPrefs.GetInt("HighScore", 0)) {
+            PlayerPrefs.SetInt("HighScore", score);
+        }
+        int highScore = PlayerPrefs.GetInt("HighScore", 0);
+        highScoreText.SetText($"HIGH SCORE: {highScore}");
     }
 
     public void GameOver()
@@ -75,10 +97,15 @@ public class PlayerController : MonoBehaviour
             gameOverMenu.SetActive(true);
             //Destroy(gameObject);
             MoveLevel.speed = 0;
+            anim["m_death_A"].wrapMode = WrapMode.ClampForever;
+            anim.Play("m_death_A");
+            froze = true;
+            HighScore();
         }
     }
 
-    public void isOnGround() {
+    public void isOnGround()
+    {
         RaycastHit hit;
         float distance = 1f;
         Vector3 dir = new Vector3(0, -1);
@@ -171,11 +198,6 @@ public class PlayerController : MonoBehaviour
             UpdateScore(10);
             Destroy(collision.gameObject);
         }
-    }
-
-    private void MovePlayerUp()
-    {
-
     }
 
 }

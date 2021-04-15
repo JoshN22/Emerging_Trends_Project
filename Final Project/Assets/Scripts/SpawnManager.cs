@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     private float spawnPosY = 4;
     private float spawnPosX = 265.9f;
     private float spawnPosZ = 11;
-    private float spawnInterval = 12.7199f;
+    private float spawnInterval = 10.585f;
     private float powerupspawnInterval = 7.0f;
     private float obstacleSpawnInterval = 0.5f;
     
