@@ -345,7 +345,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -71.81818, w: 0}
+  m_margin: {x: 0, y: 0, z: -110.713196, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -607,7 +607,7 @@ MonoBehaviour:
   coinSound: {fileID: 8300000, guid: 6a8c60075137cfd4399c724d469adb9f, type: 3}
   hasJumpPowerup: 0
   hasRunPowerup: 0
-  powerupIndicator: {fileID: 2599527334179419542, guid: 9be73f9cb5010f4418c95071ef55168a,
+  powerupIndicator: {fileID: 1929785458120098, guid: 69d5028323d5e01458665300c01fd757,
     type: 3}
   powerUpDuration: 10
   powerupSpeed: 14
@@ -1465,7 +1465,7 @@ MonoBehaviour:
   coinSound: {fileID: 8300000, guid: 6a8c60075137cfd4399c724d469adb9f, type: 3}
   hasJumpPowerup: 0
   hasRunPowerup: 0
-  powerupIndicator: {fileID: 2599527334179419542, guid: 9be73f9cb5010f4418c95071ef55168a,
+  powerupIndicator: {fileID: 1929785458120098, guid: 69d5028323d5e01458665300c01fd757,
     type: 3}
   powerUpDuration: 10
   powerupSpeed: 14
@@ -2347,7 +2347,7 @@ MonoBehaviour:
   coinSound: {fileID: 8300000, guid: 6a8c60075137cfd4399c724d469adb9f, type: 3}
   hasJumpPowerup: 0
   hasRunPowerup: 0
-  powerupIndicator: {fileID: 2599527334179419542, guid: 9be73f9cb5010f4418c95071ef55168a,
+  powerupIndicator: {fileID: 1929785458120098, guid: 69d5028323d5e01458665300c01fd757,
     type: 3}
   powerUpDuration: 10
   powerupSpeed: 14
@@ -3024,7 +3024,7 @@ MonoBehaviour:
   - {fileID: 2837441212796393152, guid: 0b9d5e26260fd684090bd23d8d0626c1, type: 3}
   - {fileID: 2127804516459650598, guid: 242aa50d8e52cbc4c948faff352ef31a, type: 3}
   powerupPrefabs:
-  - {fileID: 2599527334179419542, guid: 9be73f9cb5010f4418c95071ef55168a, type: 3}
+  - {fileID: 23553509511035153, guid: cf13dad880470564e91954f2c7e95d25, type: 3}
   - {fileID: 1929785458120098, guid: 69d5028323d5e01458665300c01fd757, type: 3}
   bg: {fileID: 9114938899269910176, guid: d0a7e4cc4285c424c9db99b94713ebcf, type: 3}
 --- !u!4 &1041996339
@@ -4496,7 +4496,7 @@ MonoBehaviour:
   coinSound: {fileID: 8300000, guid: 6a8c60075137cfd4399c724d469adb9f, type: 3}
   hasJumpPowerup: 0
   hasRunPowerup: 0
-  powerupIndicator: {fileID: 2599527334179419542, guid: 9be73f9cb5010f4418c95071ef55168a,
+  powerupIndicator: {fileID: 1929785458120098, guid: 69d5028323d5e01458665300c01fd757,
     type: 3}
   powerUpDuration: 10
   powerupSpeed: 14

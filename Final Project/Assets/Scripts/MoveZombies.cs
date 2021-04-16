@@ -25,7 +25,7 @@ public class MoveZombies : MonoBehaviour
     {
         if (gameObject.transform.position.x > -2)
         {
-            rb.AddForce(-transform.right * 50 * Time.deltaTime);
+            rb.AddForce(-transform.right * 20 * Time.deltaTime);
         }
         else
         {

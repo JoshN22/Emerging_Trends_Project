@@ -50,14 +50,14 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.SetString("HighScoreName1", "J1");
-        PlayerPrefs.SetInt("HighScore1", 16);
+        PlayerPrefs.SetString("HighScoreName1", "Joshua");
+        PlayerPrefs.SetInt("HighScore1", 78);
 
-        PlayerPrefs.SetString("HighScoreName2", "J2");
-        PlayerPrefs.SetInt("HighScore2", 9);
+        PlayerPrefs.SetString("HighScoreName2", "Tyler");
+        PlayerPrefs.SetInt("HighScore2", 47);
 
-        PlayerPrefs.SetString("HighScoreName3", "J3");
-        PlayerPrefs.SetInt("HighScore3", 3);
+        PlayerPrefs.SetString("HighScoreName3", "Emma");
+        PlayerPrefs.SetInt("HighScore3", 18);
 
         MoveLevel.speed = 18;
         rb = GetComponent<Rigidbody>();
@@ -228,15 +228,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(PowerupCooldown());
             Destroy(other.gameObject);
         }
-        else if (other.gameObject.CompareTag("RunPowerUp"))
-        {
-            playerAudio.PlayOneShot(powerSound, 1.0f);
-            hasRunPowerup = true;
-            powerupIndicator.SetActive(false);
-            powerUpText.gameObject.SetActive(true);
-            StartCoroutine(PowerupCooldown());
-            Destroy(other.gameObject);
-        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -261,6 +253,15 @@ public class PlayerController : MonoBehaviour
         {
             playerAudio.PlayOneShot(coinSound, 1.0f);
             UpdateScore(10);
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.CompareTag("RunPowerUp"))
+        {
+            playerAudio.PlayOneShot(powerSound, 1.0f);
+            hasRunPowerup = true;
+            powerupIndicator.SetActive(false);
+            powerUpText.gameObject.SetActive(true);
+            StartCoroutine(PowerupCooldown());
             Destroy(collision.gameObject);
         }
     }
