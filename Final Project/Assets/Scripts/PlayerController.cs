@@ -50,15 +50,6 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.SetString("HighScoreName1", "Joshua");
-        PlayerPrefs.SetInt("HighScore1", 78);
-
-        PlayerPrefs.SetString("HighScoreName2", "Tyler");
-        PlayerPrefs.SetInt("HighScore2", 47);
-
-        PlayerPrefs.SetString("HighScoreName3", "Emma");
-        PlayerPrefs.SetInt("HighScore3", 18);
-
         MoveLevel.speed = 18;
         rb = GetComponent<Rigidbody>();
         playerAudio = GetComponent<AudioSource>();
